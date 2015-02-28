@@ -1,0 +1,35 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:c="http://xmlns.jcp.org/jsf/core"
+	xmlns:f="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<f:composition template="index.xhtml">
+	<f:define name="content">
+		<h:form id="form1">
+		
+		<h:outputText value="#{questionController.question.title }" style="font-weight: bold;"/>
+		<hr />
+		<h:outputText value="#{questionController.question.content}" escape="false"/>
+		<hr />
+
+		
+		<h:dataTable value="#{answerController.answers}" var="answer" class="table table-striped" width="60%" id="answerTable">
+		    <h:column headerClass="col2" >
+		            <h:outputText value="#{answer.content}..." escape="false"/>	
+		    </h:column>			             
+		</h:dataTable>
+		
+		<hr />
+		<p:editor id="editor" widgetVar="editorWidget" value="#{answerController.answer.content}" width="600" height="200"/><br/>
+		<p:commandButton value="Post your Answer" styleClass="btn btn-primary" 
+		action="#{answerController.save()}" update="answerTable, :message"/>
+		
+		
+		</h:form>
+		<p:growl id="message" showDetail="true" />
+	</f:define>
+</f:composition>
+
+</html>
+

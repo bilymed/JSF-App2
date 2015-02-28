@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PROCESS model-entity="JSFProcess">
+ <PROCESS-ITEM NAME="rules:#*" PATH="/*" SHAPE="32,17,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#*:0" NAME="item" PATH="/*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="questions::#questions.xhtml" NAME="output"
+    PATH="/questions.xhtml" TARGET="rules:#questions.xhtml"
+    TITLE="questions" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="answer::#answer.xhtml" NAME="output1"
+    PATH="/answer.xhtml" TARGET="rules:#answer.xhtml" TITLE="answer" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="qcm::#qcm.xhtml" NAME="output4"
+    PATH="/qcm.xhtml" TARGET="rules:#qcm.xhtml" TITLE="qcm" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="qcmDetails::qcmdetails.xhtml" NAME="output2"
+    PATH="qcmdetails.xhtml" TARGET="rules:qcmdetails.xhtml"
+    TITLE="qcmDetails" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="student::qcms.xhtml" NAME="output5"
+    PATH="qcms.xhtml" TARGET="rules:qcms.xhtml" TITLE="student" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#qcm.xhtml" PATH="/qcm.xhtml"
+  SHAPE="240,33,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:qcmdetails.xhtml" PATH="qcmdetails.xhtml"
+  SHAPE="256,177,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:qcms.xhtml" PATH="qcms.xhtml"
+  SHAPE="272,321,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#answer.xhtml" PATH="/answer.xhtml"
+  SHAPE="272,433,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#questions.xhtml" PATH="/questions.xhtml"
+  SHAPE="272,545,0,0" model-entity="JSFProcessGroup"/>
+</PROCESS>

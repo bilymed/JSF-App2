@@ -1,0 +1,29 @@
+body{
+	margin-top: 80px;
+}
+
+.ui-widget, .ui-widget .ui-widget {
+font-size: 90% !important;
+}
+
+td.ui-datatable-subtable-header:empty {
+  display: none
+}
+
+.hide-column-names table thead tr {
+    display: none;
+}
+
+.myrid tr, .myrid td {
+    border-style: none !important
+}
+
+.dt_row {
+    max-height: 10px;
+}
+
+div[id="message_container"] {
+    position:absolute;
+    top:100px;
+    /*left:40%;*/
+}

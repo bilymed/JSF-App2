@@ -1,0 +1,38 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:c="http://xmlns.jcp.org/jsf/core"
+	xmlns:f="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h5="http://xmlns.jcp.org/jsf/passthrough">
+
+<f:composition template="index.xhtml">
+	<f:define name="content">
+		<div class="well">
+    <h:form class="form-signin form-horizontal" >
+        <div class="form-group">
+            <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+            <h:inputText value="#{loginController.username}" class="form-control"  h5:placeholder="Enter your username" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+                <h:inputSecret value="#{loginController.password}" class="form-control" h5:placeholder="Enter your password"/> 
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+                <h:commandButton action="#{loginController.login()}" value="Log In" class="btn btn-default btn-primary">
+                 	
+                </h:commandButton>
+                <!--<button> <span class="glyphicon glyphicon-log-in"></span> Login</button> -->
+            </div>
+        </div>
+    </h:form>
+</div>
+<h:messages id="messages" />
+		
+	</f:define>
+</f:composition>
+
+</html>
+
