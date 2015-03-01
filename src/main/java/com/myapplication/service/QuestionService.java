@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.myapplication.entity.Question;
+import com.myapplication.entity.User;
 import com.myapplication.repository.QuestionRepository;
 
 @Service
@@ -19,13 +20,15 @@ public class QuestionService {
 	}
 
 	public void save(Question article) {
-		questionRepository.save(article);
-		
+		questionRepository.save(article);		
 	}
 
 	public void remove(Question article) {
 		questionRepository.delete(article);
-		
+	}
+	
+	public List<Question> findByUser(User user){
+		return questionRepository.findByUser(user);
 	}
 
 }

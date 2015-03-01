@@ -1,8 +1,5 @@
 package com.myapplication.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,13 +14,13 @@ import com.myapplication.repository.UserRepository;
 
 @Service
 public class InitDbService {
-	
+
 	@Autowired
 	private AnswerRepository answerRepository;
 
 	@Autowired
-	private QuestionRepository articleRepository;
-	
+	private QuestionRepository questionRepository;
+
 	@Autowired
 	private UserRepository userRepository;
 
@@ -31,35 +28,43 @@ public class InitDbService {
 	public void init() {
 		System.out.println("****** INIT DATABASE START ******");
 		{
-			Question question = new Question();
-			question.setTitle("JPA OneToMany not deleting child ?");
-			question.setContent("content 1 content 1 content 1 content 1 content 1 content 1 content 1 content 1 content 1 content 1 content 1 content 1 content 1 content 1 content 1 content 1");
-			articleRepository.save(question);
-			{
-				Answer answer = new Answer();
-				answer.setContent("answer 1");
-				answer.setQuestion(question);
-				answerRepository.save(answer);
-			}
-		}
-		{
-			Question article = new Question();
-			article.setTitle("title 2");
-			article.setContent("content 2");
-			articleRepository.save(article);
-		}
-		{
-			Question article = new Question();
-			article.setTitle("title 3");
-			article.setContent("content 3");
-			articleRepository.save(article);
-		}		
-		{
 			User user = new User();
 			user.setUsername("username");
 			user.setPassword("password");
 			userRepository.save(user);
+			{
+				Question question = new Question();
+				question.setTitle("JPA OneToMany not deleting child ?");
+				question.setContent("I have a problem with a simple OneToMany "
+						+ "mapping between a parent and a child entity. All works well, "
+						+ "only that child records are not deleted when i remove them "
+						+ "from the collection.");
+			    question.setUser(user);
+				questionRepository.save(question);
+				{
+					Answer answer = new Answer();
+					answer.setContent("You need to either use vendor-specific extensions "
+							+ "to force this behaviour or explicitly delete the child "
+							+ "AND remove it from the parent's collection.");
+					answer.setQuestion(question);
+					answerRepository.save(answer);
+				}
+			}
+			{
+				Question question = new Question();
+				question.setTitle("title 2");
+				question.setContent("content 2");
+				questionRepository.save(question);
+			}
+			{
+				Question question = new Question();
+				question.setTitle("title 3");
+				question.setContent("content 3");
+				questionRepository.save(question);
+			}
+
 		}
+
 		System.out.println("****** INIT DATABASE FINISH ******");
 	}
 

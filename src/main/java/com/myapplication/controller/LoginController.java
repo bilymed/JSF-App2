@@ -24,13 +24,11 @@ public class LoginController implements Serializable {
 	private UserService userService;
 	private boolean logged;
 	
-	//private User user = new User();
-	//private List<User> users;
+	private User user = new User();
+	private List<User> users;
 
 	private String username;
 	private String password;
-
-	// private String message;
 	
 	@PostConstruct
 	public void loadUser(){
@@ -39,21 +37,12 @@ public class LoginController implements Serializable {
 	}
 
 	public String login() {
-		// String result = userService.findOne(id).toString();
-		//String un = null;
-		//for(User u : users){
-	    //    if(u.getUsername().contains(username))
-	    //       un = username;
-	    //    break;
-	    //}
-		//if(users.contains(user)){
-		//String un = userService.findByName(username).getUsername().toString();
-		//String up = userService.findByPassword(password).getPassword().toString();
-		if ((userService.findByName(username)) &&  (userService.findByPassword(password))) {
+		if ((userService.findByUserName(username)) &&  (userService.findByPassword(password))) {
 			HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 			session.setAttribute("username", username);
+			user = userService.findByName(username);
 			this.logged = true;
-			return "questions";
+			return "question";
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_WARN,"Invalid Login!", "Please Try Again!"));
 			return "login";
@@ -66,6 +55,8 @@ public class LoginController implements Serializable {
 	      this.logged = false;
 	      return "login";
 	}
+	
+	//=============================================================================================//
 
 	public UserService getUserService() {
 		return userService;
@@ -99,10 +90,20 @@ public class LoginController implements Serializable {
 		this.logged = logged;
 	}
 
-	
-	
-	
-	
-	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public List<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}
 
 }

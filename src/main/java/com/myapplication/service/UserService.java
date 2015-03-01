@@ -22,12 +22,16 @@ public class UserService {
 		return userRepository.findOne(id);
 	}
 	
-	public boolean findByName(String username){
-		return userRepository.findByName(username);
+	public boolean findByUserName(String username){
+		return userRepository.findByUserName(username);
 	}	
 	
 	public boolean findByPassword(String password){
 		return userRepository.findByPassword(password);
+	}
+	
+	public User findByName(String username){
+		return userRepository.findByName(username);		
 	}
 
 }

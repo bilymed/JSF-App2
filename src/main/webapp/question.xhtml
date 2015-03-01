@@ -9,9 +9,14 @@
 <f:composition template="index.xhtml">
 	<f:define name="content">
 			<h:dataTable value="#{questionController.questions}" var="question" class="table table-striped" width="60%" id="questionTable">
+			    <h:column headerClass="col1" >
+			    <h:form>
+			    	<h:commandLink  value="#{question.user.username}" action="qtuser" />        
+			        </h:form>
+			    </h:column>
 			    <h:column headerClass="col2" >
 			    <h:form>
-			        <h:commandLink  id="bbbb" value="#{question.title}" action="answer" >
+			        <h:commandLink  value="#{question.title}" action="answer" >
 			            <c:setPropertyActionListener value="#{question}" target="#{questionController.question}" />
 			        </h:commandLink>
 			        

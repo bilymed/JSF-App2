@@ -13,7 +13,7 @@
 		<h:outputText value="#{questionController.question.content}" escape="false"/>
 		<hr />
 
-		
+		<h:outputLabel value="Answers :" />
 		<h:dataTable value="#{answerController.answers}" var="answer" class="table table-striped" width="60%" id="answerTable">
 		    <h:column headerClass="col2" >
 		            <h:outputText value="#{answer.content}..." escape="false"/>	
