@@ -7,24 +7,63 @@
 
 <f:composition template="index.xhtml">
 	<f:define name="content">
-    <h:form>
-    
-    	<h:dataTable value="#{questionByUserController.questions}" var="question" class="table table-striped" width="60%" id="questionTable">
-			    <h:column headerClass="col1" >
+    <h:form id="myform">  
+    	<p:dataTable value="#{questionByUserController.questions}" var="question" width="60%" id="questionTable">
+    			<p:column width="150" headerText="">
+			    	<p:commandButton icon="ui-icon-trash" action="#{questionByUserController.remove(question)}" update="questionTable, :message">
+			    		<p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-alert" />
+					</p:commandButton>
+			    	<p:commandButton icon="ui-icon-pencil" action="#{questionByUserController.setQuestion(question)}"
+			    				     update=":questionForm" oncomplete="PF('questionDialog').show()" resetValues="true"/>
+				</p:column>
+			    <p:column width="150" headerText="User">
 			    <h:outputText value="#{question.user.username}" />	
-			    </h:column>
-			    <h:column headerClass="col2" >
-			        <h:commandLink  id="bbbb" value="#{question.title}" action="answer" >
+			    </p:column>
+			    <p:column headerText="Question" >
+			        <h:commandLink  value="#{question.title}" action="answer" style="color:#0066CC">
 			            <c:setPropertyActionListener value="#{question}" target="#{questionController.question}" />
 			        </h:commandLink>
 			            <br/>
-			            <div style="max-height: 10px;">
-			            <h:outputText value="#{jf:substring(question.content, 0, 100)}..." escape="false"/>	
-			            </div>	            		              
-			    </h:column>			             
-		</h:dataTable>
-
+			            <h:outputText value="#{jf:substring(question.content, 0, 100)}..." escape="false"/>	            		              
+			    </p:column>			             
+		</p:dataTable>
     </h:form>
+    
+    <p:dialog widgetVar="questionDialog" closeOnEscape="true" modal="true" showEffect="fade" hideEffect="fade" width="800" height="400" header="Question">
+		<h:form id="questionForm">
+			<p:messages />
+			<p:focus />
+			<p:panelGrid columns="2" styleClass="myrid">
+				title : 
+				<p:inputTextarea value="#{questionByUserController.question.title}" rows="2" cols="50" />
+				content : 
+				<p:editor id="editor" widgetVar="editorWidget" value="#{questionByUserController.question.content}" width="600" />
+					<p:commandButton value="save" action="#{questionByUserController.save()}"
+						update="questionForm, :myform:questionTable"
+						styleClass="ui-priority-primary"
+						oncomplete="handleDialogSubmit(args, 'questionDialog')" style="width:100; height:30" />
+			</p:panelGrid>
+		</h:form>
+	</p:dialog>
+	
+	<p:growl id="message" />
+	
+	<h:form>
+		<p:confirmDialog global="true">
+			<p:commandButton value="Yes" type="button"
+				styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+			<p:commandButton value="No" type="button"
+				styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+		</p:confirmDialog>
+	</h:form>
+		
+		<script type="text/javascript">
+    		function handleDialogSubmit(args, dialogName) {
+        		if (!args.validationFailed) {
+            		PF(dialogName).hide();
+        		}
+    		}
+		</script>
 		
 	</f:define>
 </f:composition>

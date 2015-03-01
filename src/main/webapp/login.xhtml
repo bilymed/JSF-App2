@@ -11,17 +11,17 @@
     <h:form class="form-signin form-horizontal" >
         <div class="form-group">
             <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
-            <h:inputText value="#{loginController.username}" class="form-control"  h5:placeholder="Enter your username" />
+            <h:inputText value="#{userController.username}" class="form-control"  h5:placeholder="Enter your username" />
             </div>
         </div>
         <div class="form-group">
             <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
-                <h:inputSecret value="#{loginController.password}" class="form-control" h5:placeholder="Enter your password"/> 
+                <h:inputSecret value="#{userController.password}" class="form-control" h5:placeholder="Enter your password"/> 
             </div>
         </div>
         <div class="form-group">
             <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
-                <h:commandButton action="#{loginController.login()}" value="Log In" class="btn btn-default btn-primary">
+                <h:commandButton action="#{userController.login()}" value="Log In" class="btn btn-default btn-primary">
                  	
                 </h:commandButton>
                 <!--<button> <span class="glyphicon glyphicon-log-in"></span> Login</button> -->

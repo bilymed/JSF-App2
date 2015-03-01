@@ -9,6 +9,7 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
 public class MyWebAppInitializer implements WebApplicationInitializer {
 
 	public void onStartup(ServletContext container) {
+		
 		// Create the 'root' Spring application context
 		AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
 		rootContext.register(SpringConfiguration.class);

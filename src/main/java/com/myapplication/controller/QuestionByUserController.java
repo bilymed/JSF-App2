@@ -4,9 +4,11 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import com.myapplication.entity.Question;
 import com.myapplication.service.QuestionService;
@@ -20,8 +22,8 @@ public class QuestionByUserController implements Serializable {
 	@ManagedProperty("#{questionService}")
 	private QuestionService questionService;
 	
-	@ManagedProperty("#{loginController}")
-	private LoginController loginController;
+	@ManagedProperty("#{userController}")
+	private UserController userController;
 	
 	private List<Question> questions;
 	private Question question = new Question();
@@ -29,50 +31,59 @@ public class QuestionByUserController implements Serializable {
 	
 	@PostConstruct
 	public void loadQuestionsByUser(){
-		questions = questionService.findByUser(loginController.getUser());
+		questions = questionService.findByUser(userController.getUser());
 	}
-
-
-	public QuestionService getQuestionService() {
-		return questionService;
-	}
-
-
-	public void setQuestionService(QuestionService questionService) {
-		this.questionService = questionService;
-	}
-
-
-	public LoginController getLoginController() {
-		return loginController;
-	}
-
-
-	public void setLoginController(LoginController loginController) {
-		this.loginController = loginController;
-	}
-
-
+	
 	public List<Question> getQuestions() {
 		return questions;
 	}
-
+	
+	public void save(){
+		questionService.save(question);
+		question = new Question();
+		questions = questionService.findByUser(userController.getUser());
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Question Saved!", null));
+	}
+	
+	public void remove(Question question){
+		questionService.remove(question);
+		questions = questionService.findByUser(userController.getUser());
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Question removed!", null));
+	}
+	
+	public void refresh(){
+		questions.clear();
+		questions = questionService.findByUser(userController.getUser());
+	}
+	
+	//=========================================================================================================//
 
 	public void setQuestions(List<Question> questions) {
 		this.questions = questions;
 	}
 
-
 	public Question getQuestion() {
 		return question;
 	}
 
-
 	public void setQuestion(Question question) {
 		this.question = question;
 	}
-	
-	
-	
-	
+
+	public QuestionService getQuestionService() {
+		return questionService;
+	}
+
+	public void setQuestionService(QuestionService questionService) {
+		this.questionService = questionService;
+	}
+
+	public UserController getUserController() {
+		return userController;
+	}
+
+	public void setUserController(UserController userController) {
+		this.userController = userController;
+	}
+		
 }

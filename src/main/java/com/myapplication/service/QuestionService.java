@@ -19,12 +19,12 @@ public class QuestionService {
 		return questionRepository.findAll();
 	}
 
-	public void save(Question article) {
-		questionRepository.save(article);		
+	public void save(Question question) {
+		questionRepository.save(question);		
 	}
 
-	public void remove(Question article) {
-		questionRepository.delete(article);
+	public void remove(Question question) {
+		questionRepository.delete(question);
 	}
 	
 	public List<Question> findByUser(User user){

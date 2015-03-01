@@ -8,52 +8,50 @@
 
 <f:composition template="index.xhtml">
 	<f:define name="content">
+	
+	<h:form id="myform">
+			<h:commandLink  value="My Questions" action="qtuser" styleClass="btn btn-primary" style="float: right; margin-bottom:5px"
+			actionListener="#{questionByUserController.refresh()}" />
+			
 			<h:dataTable value="#{questionController.questions}" var="question" class="table table-striped" width="60%" id="questionTable">
 			    <h:column headerClass="col1" >
-			    <h:form>
-			    	<h:commandLink  value="#{question.user.username}" action="qtuser" />        
-			        </h:form>
+			    	<h:outputText  value="#{question.user.username}" />        
 			    </h:column>
 			    <h:column headerClass="col2" >
-			    <h:form>
 			        <h:commandLink  value="#{question.title}" action="answer" >
 			            <c:setPropertyActionListener value="#{question}" target="#{questionController.question}" />
-			        </h:commandLink>
-			        
+			        </h:commandLink>	        
 			            <br/>
-			            <div style="max-height: 10px;">
-			            <h:outputText value="#{jf:substring(question.content, 0, 100)}..." escape="false"/>	
-			            </div>	            		            
-			   </h:form>   
+			            <h:outputText value="#{jf:substring(question.content, 0, 100)}..." escape="false" />		            		               
 			    </h:column>			             
 			</h:dataTable>
 			
 			<hr/>
-			<form>
+			</h:form>
+			<h:form>
 			<p:commandButton value="Ask Question"
 				action="#{questionController.clear()}" update=":questionForm"
 				oncomplete="PF('questionDialog').show()" resetValues="true" />
-			</form>
+			</h:form>
 			
-			<p:dialog widgetVar="questionDialog" closeOnEscape="true" modal="true" showEffect="fade" hideEffect="fade" width="800" height="400"
-			header="Question">
+			<p:dialog widgetVar="questionDialog" closeOnEscape="true" modal="true" showEffect="fade" hideEffect="fade" width="800" height="400" header="Question">
 			<h:form id="questionForm">
 			<p:panelGrid columns="2" styleClass="myridd">
 					title : 
-					<p:inputTextarea rows="2" cols="33" autoResize="false" value="#{questionController.question.title}"/>
+					<p:inputTextarea rows="2" cols="50" autoResize="false" value="#{questionController.question.title}"/>
 					content :  
-					<p:editor id="editor" widgetVar="editorWidget"
-					value="#{questionController.question.content}" width="600" />
+					<p:editor id="editor" widgetVar="editorWidget" value="#{questionController.question.content}" width="600" />
 				<br />
 				<p:commandButton value="Post your Question" action="#{questionController.save()}"
-							update="questionForm, :questionTable"
+							update="questionForm, :myform:questionTable"
 							styleClass="ui-priority-primary"
-							oncomplete="handleDialogSubmit(args, 'questionDialog')" style="width:100; height:30" />
+							oncomplete="handleDialogSubmit(args, 'questionDialog')"  />
 			</p:panelGrid>
 			</h:form>
 			</p:dialog>
 
 	<p:messages id="message" />
+	
 		
 		<script type="text/javascript">
     		function handleDialogSubmit(args, dialogName) {
@@ -62,7 +60,6 @@
         		}
     		}
 		</script>
-
 		
 	</f:define>
 </f:composition>

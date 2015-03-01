@@ -8,15 +8,18 @@
 	<f:define name="content">
 		<h:form id="form1">
 		
-		<h:outputText value="#{questionController.question.title }" style="font-weight: bold;"/>
+		<h:outputText value="#{questionController.question.title }" style="font-weight: bold"/>
 		<hr />
 		<h:outputText value="#{questionController.question.content}" escape="false"/>
 		<hr />
 
 		<h:outputLabel value="Answers :" />
 		<h:dataTable value="#{answerController.answers}" var="answer" class="table table-striped" width="60%" id="answerTable">
-		    <h:column headerClass="col2" >
-		            <h:outputText value="#{answer.content}..." escape="false"/>	
+		    <h:column>
+		            <h:outputText value="#{answer.user.username}:" escape="false" style="font-weight: bold"/>	
+		    </h:column>	
+		    <h:column>
+		            <h:outputText value="#{answer.content}" escape="false"/>	
 		    </h:column>			             
 		</h:dataTable>
 		

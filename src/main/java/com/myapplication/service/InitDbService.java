@@ -29,8 +29,8 @@ public class InitDbService {
 		System.out.println("****** INIT DATABASE START ******");
 		{
 			User user = new User();
-			user.setUsername("username");
-			user.setPassword("password");
+			user.setUsername("user1");
+			user.setPassword("pass1");
 			userRepository.save(user);
 			{
 				Question question = new Question();
@@ -47,6 +47,7 @@ public class InitDbService {
 							+ "to force this behaviour or explicitly delete the child "
 							+ "AND remove it from the parent's collection.");
 					answer.setQuestion(question);
+					answer.setUser(user);
 					answerRepository.save(answer);
 				}
 			}
@@ -54,15 +55,24 @@ public class InitDbService {
 				Question question = new Question();
 				question.setTitle("title 2");
 				question.setContent("content 2");
+				question.setUser(user);
 				questionRepository.save(question);
 			}
+		}
+		{
+			User user = new User();
+			user.setUsername("user2");
+			user.setPassword("pass2");
+			userRepository.save(user);
 			{
-				Question question = new Question();
-				question.setTitle("title 3");
-				question.setContent("content 3");
-				questionRepository.save(question);
+				{
+					Question question = new Question();
+					question.setTitle("title 3");
+					question.setContent("content 3");
+					question.setUser(user);
+					questionRepository.save(question);
+				}
 			}
-
 		}
 
 		System.out.println("****** INIT DATABASE FINISH ******");

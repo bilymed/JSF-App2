@@ -1,5 +1,6 @@
 package com.myapplication.controller;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -15,13 +16,18 @@ import com.myapplication.service.AnswerService;
 
 @ManagedBean
 @RequestScoped
-public class AnswerController {
+public class AnswerController implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	
 	@ManagedProperty("#{answerService}")
 	private AnswerService answerService;
 	
 	@ManagedProperty("#{questionController.question}")
 	private Question question;
+	
+	@ManagedProperty("#{userController}")
+	private UserController userController;
 	
 	private List<Answer> answers;
 	private Answer answer = new Answer();
@@ -32,6 +38,7 @@ public class AnswerController {
 	}
 	
 	public void save(){
+		answer.setUser(userController.getUser());
 		answer.setQuestion(question);
 		answerService.save(answer);
 		answers = answerService.findByQuestion(question);
@@ -73,6 +80,14 @@ public class AnswerController {
 
 	public void setQuestion(Question question) {
 		this.question = question;
-	}	
+	}
+
+	public UserController getUserController() {
+		return userController;
+	}
+
+	public void setUserController(UserController userController) {
+		this.userController = userController;
+	}
 
 }

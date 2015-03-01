@@ -6,11 +6,6 @@
 <h:head>
     <h:outputStylesheet library="bootstrap" name="css/bootstrap.min.css" />
 	<h:outputStylesheet library="css" name="style.css" />
-	<!--<h:outputScript library="bootstrap" name="js/bootstrap.min.js" />-->
-	<!--<h:outputScript library="bootstrap" name="js/npm.js" />-->
-	<!--<h:outputStylesheet library="css" name="bootstrap-theme.min.css" />-->
-	<!--<h:outputScript library="scripts" name="jquery-1.11.0.min.js" />-->
-	<!--<h:outputScript library="scripts" name="bootstrap.min.js" />-->
 </h:head>
 <h:body>
 	<h:form>
@@ -32,12 +27,14 @@
 							<li class="active">
 							<h:commandLink value="Questions" action="question" actionListener="#{questionController.clear()}" />
 							</li>
-							<li><h:commandLink value="Student"
-									action="student" /></li>
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
-						 <jc:if test="#{loginController.logged}">  
-                                <li><h:commandLink value="Log Out" action="#{loginController.logout()}" /></li>
+						 <jc:if test="#{userController.logged}">  
+						 		<li>
+						 		<h:commandLink value="welcome #{userController.username} !" style="color:white;" action="qtuser"
+						 					   actionListener="#{questionByUserController.refresh()}" />
+						 		</li>
+                                <li><h:commandLink value="Log Out" action="#{userController.logout()}" /></li>
                          </jc:if>						
 						</ul>
 					</div>
@@ -51,6 +48,5 @@
 		</f:insert>
 	</div>
 	<hr />
-
 </h:body>
 </html>

@@ -14,10 +14,10 @@ public class Question {
 	@GeneratedValue
 	private int id;
 	
-	@Size(min = 1, message = "Title cannot be empty !")
+	@Size(min = 1, message = "Question title cannot be empty !")
 	private String title;
 	
-	@Size(min = 1, max= 10000, message = "Content cannot be empty !")
+	@Size(min = 1, max= 10000, message = "Question content cannot be empty !")
 	private String content;
 	
 	@ManyToOne

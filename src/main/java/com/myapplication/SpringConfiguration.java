@@ -29,7 +29,6 @@ public class SpringConfiguration {
 		Properties jpaProperties = new Properties();
 		jpaProperties.put("hibernate.hbm2ddl.auto", "create-drop");
 		jpaProperties.put("hibernate.show_sql", "true");
-		// jpaProperties.put("hibernate.format_sql", "true");
 		entityManagerFactory.setJpaProperties(jpaProperties);
 		entityManagerFactory
 				.setPackagesToScan("com.myapplication.entity");

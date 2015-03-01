@@ -13,11 +13,14 @@ public class Answer {
 	@GeneratedValue
 	private int id;
     
-	@Size(min = 1, message = "Content cannot be empty !")
+	@Size(min = 1, message = "Answer content cannot be empty !")
     private String content;
 	
 	@ManyToOne
 	private Question question;
+	
+	@ManyToOne
+	private User user;
 
 	public int getId() {
 		return id;
@@ -42,7 +45,13 @@ public class Answer {
 	public void setQuestion(Question question) {
 		this.question = question;
 	}
-	
-	
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 
 }
